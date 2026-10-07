@@ -1,9 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="fi">
 <head>
-<title>Testi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SeITL Harjoituskalenteri</title>
+ 
+<script/cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.jsscript>
+<script src="https://cdn.jsdelivr.net/npm/6.1.17/locales-all.global.min.jsscript>
+ 
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 20px;
+}
+ 
+h1 {
+color: #003366;
+}
+ 
+#calendar {
+max-width: 1200px;
+margin: 20px auto;
+}
+</style>
 </head>
 <body>
-<h1>TESTI TOIMII</h1>
+ 
+<h1>SeITL Harjoituskalenteri</h1>
+ 
+<div id="calendar"></div>
+ 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+ 
+fetch('./calendar.json')
+.then(response => {
+if (!response.ok) {
+throw new Error('calendar.json ei löytynyt');
+}
+return response.json();
+})
+.then(events => {
+ 
+const calendar = new FullCalendar.Calendar(
+document.getElementById('calendar'),
+{
+locale: 'fi',
+ 
+initialView: 'dayGridMonth',
+ 
+headerToolbar: {
+left: 'prev,next today',
+center: 'title',
+right: 'dayGridMonth,timeGridWeek,timeGridDay'
+},
+ 
+events: events
+}
+);
+ 
+calendar.render();
+})
+.catch(error => {
+ 
+console.error(error);
+ 
+document.getElementById('calendar').innerHTML =
+'<p style="color:red">Virhe: ' +
+error.message +
+'</p>';
+});
+ 
+});
+</script>
+ 
 </body>
 </html>
