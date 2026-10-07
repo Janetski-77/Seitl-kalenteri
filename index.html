@@ -52,9 +52,9 @@ return response.json();
 const calendarEl =
 document.getElementById("calendar");
  
-const calendar =
-new FullCalendar.Calendar(calendarEl, {
- 
+const calendar = new FullCalendar.Calendar(
+document.getElementById("calendar"),
+{
 locale: "fi",
  
 initialView: "dayGridMonth",
@@ -65,8 +65,20 @@ center: "title",
 right: "dayGridMonth,timeGridWeek,timeGridDay"
 },
  
-events: events
-});
+events: events,
+ 
+eventContent: function(arg) {
+return {
+html: `
+<div>
+<strong>${arg.event.title}</strong><br>
+${arg.event.extendedProps.location || ""}
+</div>
+`
+};
+}
+}
+);
  
 calendar.render();
 })
