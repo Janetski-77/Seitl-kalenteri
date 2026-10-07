@@ -43,6 +43,10 @@ box-shadow: 0 2px 10px rgba(0,0,0,.1);
 <select id="groupFilter">
 <option value="all">Kaikki ryhmät</option>
 </select>
+
+<button id="downloadIcs">
+Lataa valitun ryhmän ICS
+</button>
  
 <div id="calendar"></div>
  
@@ -131,6 +135,68 @@ document.getElementById("calendar").innerHTML =
 "<p style='color:red'>Virhe: " +
 error.message +
 "</p>";
+});
+
+  document.getElementById("downloadIcs").addEventListener("click", function () {
+ 
+const selectedGroup =
+document.getElementById("groupFilter").value;
+ 
+const events =
+selectedGroup === "all"
+? allEvents
+: allEvents.filter(
+e => e.title === selectedGroup
+);
+ 
+let ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SeITL//Kalenteri//FI
+`;
+ 
+events.forEach(event => {
+ 
+const start =
+event.start
+.replace(/[-:]/g, "")
+.replace(".000Z", "Z");
+ 
+const end =
+event.end
+.replace(/[-:]/g, "")
+.replace(".000Z", "Z");
+ 
+ics +=
+`BEGIN:VEVENT
+SUMMARY:${event.title}
+LOCATION:${event.location || ""}
+DTSTART:${start}
+DTEND:${end}
+END:VEVENT
+`;
+});
+ 
+ics += "END:VCALENDAR";
+ 
+const blob =
+new Blob([ics], {
+type: "text/calendar;charset=utf-8"
+});
+ 
+const link = document.createElement("a");
+ 
+link.href = URL.createObjectURL(blob);
+ 
+link.download =
+(selectedGroup === "all"
+? "seitl-kalenteri"
+: selectedGroup + "-harjoitukset")
++ ".ics";
+ 
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
 });
  
 </script>
