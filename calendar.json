@@ -1,12 +1,1 @@
-[
-{
-"title": "RiverKids Jääharjoitus",
-"group": "RiverKids",
-"start": "2026-10-06T17:00:00",
-"end": "2026-10-06T18:00:00",
-"status": "Vahvistettu",
-"location": "Seinäjoen jäähalli",
-"coach": "Matti Meikäläinen",
-"description": "Jääharjoitus"
-}
-]
+[{"title":"JÄ","start":"2026-09-28T07:00:00Z","end":"2026-09-28T08:00:00Z","location":"JH1 Energia areena"},{"title":"K1 Vihr","start":"2026-09-28T12:15:00Z","end":"2026-09-28T13:00:00Z","location":"JH1 Energia areena"},{"title":"Lilat","start":null,"end":null,"location":"JH1 Energia areena"},{"title":"Luistelukoulu","start":"2026-09-28T14:00:00Z","end":"2026-09-28T14:45:00Z","location":"JH1 Energia areena"},{"title":"RF","start":"2026-09-28T12:15:00Z","end":"2026-09-28T13:30:00Z","location":"JH2 Seinäjoen jäähalli"},{"title":"K2 pun","start":"2026-09-28T13:45:00Z","end":"2026-09-28T14:30:00Z","location":"JH2 Seinäjoen jäähalli"},{"title":"K3 viol","start":"2026-09-28T14:45:00Z","end":"2026-09-28T15:30:00Z","location":"JH1 Energia areena"},{"title":"T1","start":"2026-09-28T14:30:00Z","end":"2026-09-28T15:15:00Z","location":"JH2 Seinäjoen jäähalli"},{"title":"Tim","start":"2026-09-28T15:15:00Z","end":"2026-09-28T16:00:00Z","location":"JH2 Seinäjoen jäähalli"},{"title":"RF","start":"2026-09-28T13:40:00Z","end":"2026-09-28T14:25:00Z","location":"JH2 Sali"},{"title":"K1 Vihr","start":"2026-09-28T13:15:00Z","end":"2026-09-28T14:15:00Z","location":"JH1 peilisali"},{"title":"K2 pun","start":"2026-09-28T14:30:00Z","end":"2026-09-28T15:30:00Z","location":"JH1 peilisali"},{"title":"Tim","start":"2026-09-28T14:00:00Z","end":"2026-09-28T14:30:00Z","location":"JH1 peilisali"},{"title":"T1","start":null,"end":null,"location":"JH1 peilisali"}]
