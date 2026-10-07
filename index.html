@@ -51,12 +51,14 @@ Lataa valitun ryhmän ICS
 <div id="calendar"></div>
  
 <script>
+
+let allEvents = [];
  
 fetch("calendar.json")
 .then(response => response.json())
 .then(events => {
  
-const allEvents = events;
+allEvents = events;
  
 const filter = document.getElementById("groupFilter");
  
