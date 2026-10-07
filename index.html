@@ -55,7 +55,23 @@ response.status
 return response.json();
 })
 .then(events => {
+const allEvents = events;
  
+const filter = document.getElementById("groupFilter");
+ 
+const groups = [...new Set(
+events.map(e => e.title)
+)];
+ 
+groups.sort();
+ 
+groups.forEach(group => {
+const option = document.createElement("option");
+option.value = group;
+option.textContent = group;
+filter.appendChild(option);
+});
+  
 const calendarEl =
 document.getElementById("calendar");
  
@@ -91,6 +107,21 @@ ${arg.event.extendedProps.location || ""}
 );
  
 calendar.render();
+  filter.addEventListener("change", function () {
+ 
+const selectedGroup = this.value;
+ 
+calendar.removeAllEvents();
+ 
+const filteredEvents =
+selectedGroup === "all"
+? allEvents
+: allEvents.filter(
+e => e.title === selectedGroup
+);
+ 
+calendar.addEventSource(filteredEvents);
+});
 })
 .catch(error => {
  
