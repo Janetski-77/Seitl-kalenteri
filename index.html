@@ -43,6 +43,51 @@ max-width: 150px;
 white-space: normal !important;
 word-wrap: break-word;
 }
+
+@media (max-width: 768px) {
+ 
+body {
+margin: 5px;
+}
+ 
+h1 {
+font-size: 1.3rem;
+}
+ 
+#groupFilter,
+#downloadIcs {
+width: 100%;
+box-sizing: border-box;
+margin-bottom: 10px;
+padding: 10px;
+font-size: 16px;
+}
+ 
+#calendar {
+padding: 5px;
+}
+ 
+.fc-toolbar {
+flex-wrap: wrap !important;
+}
+ 
+.fc-toolbar-title {
+font-size: 1rem !important;
+}
+ 
+.fc-button {
+padding: 4px 8px !important;
+font-size: 0.8rem !important;
+}
+ 
+.fc-timegrid-slot-label {
+font-size: 0.75rem;
+}
+ 
+.fc-event {
+font-size: 0.7rem;
+}
+}  
 </style>
 </head>
 <body>
@@ -84,6 +129,8 @@ option.value = group;
 option.textContent = group;
 filter.appendChild(option);
 });
+
+  const mobile = window.innerWidth < 768;
  
 const calendar = new FullCalendar.Calendar(
 document.getElementById("calendar"),
@@ -93,7 +140,7 @@ locale: "fi",
 firstDay: 1,
 weekNumbers: true,
 weekText: "Viikko", 
-initialView: "timeGridWeek",
+initialView: mobile ? "timeGridDay" : "timeGridWeek",
 
 slotEventOverlap: true,
 eventMaxStack: 10,
@@ -104,14 +151,23 @@ slotMaxTime: "23:00:00",
 expandRows: true,
  
 headerToolbar: {
-left: "prev,next today",
+left: "prev,next",
 center: "title",
-right: "dayGridMonth,timeGridWeek,timeGridDay"
+right: mobile
+? "timeGridDay"
+: "dayGridMonth,timeGridWeek,timeGridDay"
 },
  
 events: allEvents,
  
 eventContent: function(arg) {
+ 
+if (mobile) {
+return {
+html: `<strong>${arg.event.title}</strong>`
+};
+}
+ 
 return {
 html: `
 <div>
@@ -120,6 +176,7 @@ ${arg.event.extendedProps.location || ""}
 </div>
 `
 };
+
 }
 }
 );
