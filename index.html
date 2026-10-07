@@ -54,7 +54,7 @@ Lataa valitun ryhmän aikataulut ICS muodossa
 
 let allEvents = [];
  
-fetch("calendar.json")
+fetch("./calendar.json")
 .then(response => response.json())
 .then(events => {
  
