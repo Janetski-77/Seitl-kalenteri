@@ -1,14 +1,12 @@
 [
 {
 "title": "RiverKids Jääharjoitus",
+"group": "RiverKids",
 "start": "2026-10-06T17:00:00",
 "end": "2026-10-06T18:00:00",
-"group": "RiverKids"
-},
-{
-"title": "RiverStars Oheisharjoitus",
-"start": "2026-10-07T18:00:00",
-"end": "2026-10-07T19:00:00",
-"group": "RiverStars"
+"status": "Vahvistettu",
+"location": "Seinäjoen jäähalli",
+"coach": "Matti Meikäläinen",
+"description": "Jääharjoitus"
 }
 ]
