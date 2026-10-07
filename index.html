@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="fi">
-<!DOCTYPE html>
-<html lang="fi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SeITL Harjoituskalenteri</title>
  
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+<script src=jsdelivr.net/npm/fullcalendar@6.1.17/locales-all.global.min.jsscript>
  
 <style>
 body {
@@ -19,6 +18,25 @@ background: #f5f7fa;
 h1 {
 color: #003366;
 }
+ 
+#groupFilter {
+padding: 8px;
+margin-bottom: 15px;
+font-size: 16px;
+}
+ 
+#calendar {
+max-width: 1400px;
+margin: 0 auto;
+background: white;
+padding: 10px;
+border-radius: 10px;
+box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+</style>
+</head>
+<body>
+ 
 <h1>SeITL Harjoituskalenteri</h1>
  
 <label for="groupFilter">Ryhmä:</label>
@@ -26,35 +44,14 @@ color: #003366;
 <option value="all">Kaikki ryhmät</option>
 </select>
  
-<div id="calendar"></div> 
-#calendar {
-max-width: 1200px;
-margin: 20px auto;
-}
-</style>
-</head>
-<body>
-<script>
-console.log("FullCalendar =", FullCalendar);
-</script> 
-<h1>SeiTL Harjoituskalenteri</h1>
- 
 <div id="calendar"></div>
  
 <script>
-document.addEventListener("DOMContentLoaded", function () {
  
-fetch("./calendar.json")
-.then(response => {
-if (!response.ok) {
-throw new Error(
-"calendar.json ei löytynyt. HTTP " +
-response.status
-);
-}
-return response.json();
-})
+fetch("calendar.json")
+.then(response => response.json())
 .then(events => {
+ 
 const allEvents = events;
  
 const filter = document.getElementById("groupFilter");
@@ -71,27 +68,28 @@ option.value = group;
 option.textContent = group;
 filter.appendChild(option);
 });
-  
-const calendarEl =
-document.getElementById("calendar");
  
 const calendar = new FullCalendar.Calendar(
 document.getElementById("calendar"),
 {
 locale: "fi",
-firstDay: 1, 
-initialView: "dayGridWeek",
+ 
+firstDay: 1,
+ 
+initialView: "timeGridWeek",
+ 
 slotMinTime: "07:00:00",
 slotMaxTime: "23:00:00",
+ 
 expandRows: true,
  
 headerToolbar: {
-  left: "prev,next today",
-  center: "title",
-  right: "dayGridMonth,timeGridWeek,timeGridDay"
+left: "prev,next today",
+center: "title",
+right: "dayGridMonth,timeGridWeek,timeGridDay"
 },
  
-events: events,
+events: allEvents,
  
 eventContent: function(arg) {
 return {
@@ -107,32 +105,33 @@ ${arg.event.extendedProps.location || ""}
 );
  
 calendar.render();
-  filter.addEventListener("change", function () {
+ 
+filter.addEventListener("change", function () {
  
 const selectedGroup = this.value;
  
 calendar.removeAllEvents();
  
-const filteredEvents =
+const filtered =
 selectedGroup === "all"
 ? allEvents
 : allEvents.filter(
 e => e.title === selectedGroup
 );
  
-calendar.addEventSource(filteredEvents);
+calendar.addEventSource(filtered);
 });
+ 
 })
 .catch(error => {
- 
 console.error(error);
  
 document.getElementById("calendar").innerHTML =
-'<p class="error">Virhe: ' +
+"<p style='color:red'>Virhe: " +
 error.message +
-'</p>';
+"</p>";
 });
-});
+ 
 </script>
  
 </body>
