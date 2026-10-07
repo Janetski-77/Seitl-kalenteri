@@ -30,7 +30,7 @@ margin: 20px auto;
 <script>
 console.log("FullCalendar =", FullCalendar);
 </script> 
-<h1>SeITL Harjoituskalenteri</h1>
+<h1>SeiTL Harjoituskalenteri</h1>
  
 <div id="calendar"></div>
  
@@ -58,6 +58,10 @@ document.getElementById("calendar"),
 locale: "fi",
  
 initialView: "dayGridWeek",
+slotMinTime: "07:00:00",
+slotMaxTime: "23:00:00",
+ 
+expandRows: true,
  
 headerToolbar: {
 left: "prev,next today",
